@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+
+}
+
+
+html,body {
+    height: 100%;
+    margin: 0;
+}
+
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+/*обертка проекта */
+.wrapper {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    background-image: url(img/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items: flex-end;
+}
+
+/* динрозавры список */
+.dino-list {
+    list-style: none;
+    display: flex;
+    width:100vw;
+    min-height: 100vh;
+    align-items: flex-end;
+    position: relative;
+}
+/*блок с динозаврами*/
+
+.dino-item {
+    flex:1;
+}
+/* заголовки*/
+.subtitle {
+    color: floralwhite;
+    visibility: hidden;
+}
+/*Блок с картинкой и информацией о динозавре*/
+.dino-info {
+    width: 100%;
+    height: 90%;
+}
+
+
+/*изображение динозавра*/
+.dino-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain 
+}
+/*СТИЛ БЛОКА С ДИНОЗАВРОМ ПРИ КЛИКЕ НА НЕГО МЫШКОЙ*/
+.dino-item.active {
+    width: 100%;
+    height: 100%;
+    
+    }
+    
+    /*СТИЛИ БЛОКА С ДИНОЗАВРОМ НА КОТОРЫХ НЕ КЛИКНУЛИ*/
+    .dino-item.hidden{
+    width: 0;
+    flex: 0;
+    
+    }
+
+.teranozavr-img {}
+/* Описание динозавра*/
+
+.dino-desc {
+    position:absolute;
+    width: 100%;
+
+}
+
+.stegozavr-img {}
+
+.triceratops-img {}
+
+/*Стиль картинку у активированного динозавра*/
+.dino-item.active .dino-img {
+    width: 100%;
+    height: 60%;
+    align-self: flex-start;
+}
+
+/* Описание динозавра у активного элемента */
+.dino-item.active .dino-desc {
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Цвет текста */
+    color: black;
+    /* Ширина блока */
+    bottom: 0;
+    left: 0;
+    height: auto;
+}
+/* Показать заголовок блока активного динозавра */
+.dino-item.active .subtitle {
+    visibility: visible;
+}
