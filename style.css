@@ -141,7 +141,7 @@ h3 {
 }
 
 /* Поворот картинки с трицерапторсом на 180 градусов */
-.triceraptops-img {
+.triceraptos-img {
     transform: scale(-1, 1);
 }
 
