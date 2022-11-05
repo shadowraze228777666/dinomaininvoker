@@ -1,99 +1,189 @@
+/* Базовые стили */
 * {
     box-sizing: border-box;
-
 }
 
-
-html,body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
-
 
 h1,
 h2,
 h3 {
     margin: 0;
 }
-/*обертка проекта */
+
+/* Обертка */
+
 .wrapper {
     font-family: 'Roboto', sans-serif;
     height: 100%;
     background-image: url(img/bg.jpg);
-    background-repeat: no-repeat;
+    background-position: top right;
     background-size: cover;
     width: 100%;
-    overflow:hidden;
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    align-items: flex-end;
+    overflow: hidden;
+    position: relative;
 }
 
-/* динрозавры список */
+/* Список динозавров */
+
 .dino-list {
     list-style: none;
     display: flex;
-    width:100vw;
+    width: 100vw;
     min-height: 100vh;
     align-items: flex-end;
+    margin: 0 auto;
+    padding: 0;
     position: relative;
 }
-/*блок с динозаврами*/
+
+/* Блок с динозавром */
 
 .dino-item {
-    flex:1;
-}
-/* заголовки*/
-.subtitle {
-    color: floralwhite;
-    visibility: hidden;
-}
-/*Блок с картинкой и информацией о динозавре*/
-.dino-info {
-    width: 100%;
-    height: 90%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    transition: all 1s;
 }
 
-
-/*изображение динозавра*/
-.dino-img {
-    width: 90%;
-    height: 90%;
-    object-fit: contain 
-}
-/*СТИЛ БЛОКА С ДИНОЗАВРОМ ПРИ КЛИКЕ НА НЕГО МЫШКОЙ*/
+/* Стили при клике на блок с динозавром */
 .dino-item.active {
     width: 100%;
     height: 100%;
-    
-    }
-    
-    /*СТИЛИ БЛОКА С ДИНОЗАВРОМ НА КОТОРЫХ НЕ КЛИКНУЛИ*/
-    .dino-item.hidden{
-    width: 0;
-    flex: 0;
-    
-    }
-
-.teranozavr-img {}
-/* Описание динозавра*/
-
-.dino-desc {
-    position:absolute;
-    width: 100%;
-
+    align-self: flex-start;
+    background-color: #4a91934d;
 }
 
-.stegozavr-img {}
+/*Стили добавляются блоками с неактивными динозаврами*/
+.dino-item.hidden {
+    width: 0;
+    padding: 0;
+    flex: 0;
+}
 
-.triceratops-img {}
+/* Заголовки блоков динозавров */
+.subtitle {
+    color: #ffffff;
+    text-transform: uppercase;
+    /* Спрятать заголовок блока */
+    visibility: hidden;
+    margin-bottom: 20px;
+}
+
+/*Блок с информацией и картинкой динозавра*/
+.dino-info {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Картинка динозавра */
+.dino-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 1s;
+    align-self: flex-end;
+}
 
 /*Стиль картинку у активированного динозавра*/
 .dino-item.active .dino-img {
     width: 100%;
-    height: 60%;
+    height: 80%;
     align-self: flex-start;
+}
+
+/* Анимация Таранозавра */
+.dino-item.active .teranozavr-img {
+    animation: teranozavr-run 10s infinite;
+}
+
+/* Ключевые кадры для анимации терранозавра */
+@keyframes teranozavr-run {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(20deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Анимация Стегозавра */
+.dino-item.active .stegozavr-img {
+    animation: stegozavr-run 5s linear;
+}
+
+/* Ключевые кадры для анимации стегозавра */
+@keyframes stegozavr-run {
+    0% {
+        transform: translate(-100%);
+    }
+
+    100% {
+        transform: translate(0%);
+    }
+}
+
+/* Поворот картинки с трицерапторсом на 180 градусов */
+.triceraptops-img {
+    transform: scale(-1, 1);
+}
+
+/* Стили активного трицерапторса */
+.dino-item.active .triceraptops-img {
+    animation: triceraptops-run 10s infinite alternate;
+    transform: scale(1);
+}
+
+/* Ключевые кадры для анимации трицерапторса */
+
+@keyframes triceraptops-run {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    30% {
+        transform: rotate(-5deg) translateX(-10%);
+    }
+
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+/* Описание динозавра */
+.dino-desc {
+    position: absolute;
+    /* Прозрачный текст */
+    color: transparent;
+    padding: 20px 30px;
+    /* Нулевая высота */
+    height: 0;
+    width: 100%;
+    /* Спрятать вниз */
+    bottom: -100%;
+    transition: all 0.5s;
 }
 
 /* Описание динозавра у активного элемента */
@@ -106,7 +196,222 @@ h3 {
     left: 0;
     height: auto;
 }
+
 /* Показать заголовок блока активного динозавра */
 .dino-item.active .subtitle {
     visibility: visible;
+}
+
+@media (max-width: 480px) {
+    .dino-list {
+        font-size: 14px;
+    }
+}/* Базовые стили */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+/* Обертка */
+
+.wrapper {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    background-image: url(img/bg.jpg);
+    background-position: top right;
+    background-size: cover;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Список динозавров */
+
+.dino-list {
+    list-style: none;
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: flex-end;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+}
+
+/* Блок с динозавром */
+
+.dino-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    transition: all 1s;
+}
+
+/* Стили при клике на блок с динозавром */
+.dino-item.active {
+    width: 100%;
+    height: 100%;
+    align-self: flex-start;
+    background-color: #4a91934d;
+}
+
+/*Стили добавляются блоками с неактивными динозаврами*/
+.dino-item.hidden {
+    width: 0;
+    padding: 0;
+    flex: 0;
+}
+
+/* Заголовки блоков динозавров */
+.subtitle {
+    color: #ffffff;
+    text-transform: uppercase;
+    /* Спрятать заголовок блока */
+    visibility: hidden;
+    margin-bottom: 20px;
+}
+
+/*Блок с информацией и картинкой динозавра*/
+.dino-info {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Картинка динозавра */
+.dino-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 1s;
+    align-self: flex-end;
+}
+
+/*Стиль картинку у активированного динозавра*/
+.dino-item.active .dino-img {
+    width: 100%;
+    height: 80%;
+    align-self: flex-start;
+}
+
+/* Анимация Таранозавра */
+.dino-item.active .teranozavr-img {
+    animation: teranozavr-run 10s infinite;
+}
+
+/* Ключевые кадры для анимации терранозавра */
+@keyframes teranozavr-run {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(20deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Анимация Стегозавра */
+.dino-item.active .stegozavr-img {
+    animation: stegozavr-run 5s linear;
+}
+
+/* Ключевые кадры для анимации стегозавра */
+@keyframes stegozavr-run {
+    0% {
+        transform: translate(-100%);
+    }
+
+    100% {
+        transform: translate(0%);
+    }
+}
+
+/* Поворот картинки с трицерапторсом на 180 градусов */
+.triceraptops-img {
+    transform: scale(-1, 1);
+}
+
+/* Стили активного трицерапторса */
+.dino-item.active .triceraptops-img {
+    animation: triceraptops-run 10s infinite alternate;
+    transform: scale(1);
+}
+
+/* Ключевые кадры для анимации трицерапторса */
+
+@keyframes triceraptops-run {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    30% {
+        transform: rotate(-5deg) translateX(-10%);
+    }
+
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+/* Описание динозавра */
+.dino-desc {
+    position: absolute;
+    /* Прозрачный текст */
+    color: transparent;
+    padding: 20px 30px;
+    /* Нулевая высота */
+    height: 0;
+    width: 100%;
+    /* Спрятать вниз */
+    bottom: -100%;
+    transition: all 0.5s;
+}
+
+/* Описание динозавра у активного элемента */
+.dino-item.active .dino-desc {
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Цвет текста */
+    color: black;
+    /* Ширина блока */
+    bottom: 0;
+    left: 0;
+    height: auto;
+}
+
+/* Показать заголовок блока активного динозавра */
+.dino-item.active .subtitle {
+    visibility: visible;
+}
+
+@media (max-width: 480px) {
+    .dino-list {
+        font-size: 14px;
+    }
 }
